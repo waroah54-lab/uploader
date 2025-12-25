@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": { "runtime": "nodejs23.x" }
+  },
+  "routes": [
+    { "src": "/", "dest": "/public/index.html" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
