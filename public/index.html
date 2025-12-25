@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uploader - Ikyy Official</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; background:#0f172a; color:white; padding:40px }
+    .box { background:#020617; padding:30px; border-radius:12px; max-width:400px }
+    input, button { width:100%; margin-top:10px; padding:10px; border-radius:6px }
+    button { background:#22c55e; border:none; color:black; font-weight:bold }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>📤 Ikyy Uploader</h2>
+    <input type="file" id="file">
+    <button onclick="upload()">Upload</button>
+    <p id="res"></p>
+  </div>
+
+<script>
+async function upload(){
+  const f = document.getElementById('file').files[0]
+  if(!f) return alert("Pilih file dulu!")
+
+  const fd = new FormData()
+  fd.append("file", f)
+
+  const res = await fetch("/api/upload", { method:"POST", body:fd })
+  const j = await res.json()
+  document.getElementById('res').innerHTML =
+    j.url ? "✅ <a href='"+j.url+"' target='_blank'>"+j.url+"</a>" : j.error
+}
+</script>
+</body>
+</html>
